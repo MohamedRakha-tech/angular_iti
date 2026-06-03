@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { IStudent } from '../models/student';
+import { StudentService } from '../services/student.service';
 import { StudentAdd } from './student-add/student-add';
 import { StudentDetails } from './student-details/student-details';
 import { StudentEdit } from './student-edit/student-edit';
@@ -13,18 +14,20 @@ import { StudentEdit } from './student-edit/student-edit';
   styleUrl: './student-list.css',
 })
 export class StudentList {
-  students: IStudent[] = [
-    { id: 1, name: 'Ahmed', age: 20 },
-    { id: 2, name: 'Sara', age: 22 },
-  ];
+  students: IStudent[] = [];
 
   selectedStudent: IStudent | null = null;
 
   editingStudent: IStudent | null = null;
   private editingStudentId: number | null = null;
 
+  constructor(private readonly studentService: StudentService) {
+    this.students = this.studentService.getStudents();
+  }
+
   addStudent(student: IStudent): void {
-    this.students = [...this.students, student];
+    this.studentService.addStudent(student);
+    this.students = this.studentService.getStudents();
   }
 
   showDetails(student: IStudent): void {
@@ -43,9 +46,8 @@ export class StudentList {
       return;
     }
 
-    this.students = this.students.map((currentStudent) =>
-      currentStudent.id === this.editingStudentId ? student : currentStudent,
-    );
+    this.studentService.updateStudent(this.editingStudentId, student);
+    this.students = this.studentService.getStudents();
     this.editingStudent = null;
     this.editingStudentId = null;
     this.selectedStudent = student;

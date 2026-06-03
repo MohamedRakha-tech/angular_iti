@@ -1,10 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+
 import { App } from './app';
+import { routes } from './app.routes';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)],
     }).compileComponents();
   });
 
@@ -14,10 +18,14 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render student list', async () => {
+  it('should render the app shell', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Student List');
+    expect(compiled.textContent).toContain('Angular Student App');
+    expect(compiled.textContent).toContain(
+      'Angular student lab demo with service-backed data and routed pages.',
+    );
   });
 });
