@@ -1,0 +1,24 @@
+<section class="student-card">
+  <h2>Student Details</h2>
+
+  @if (student) {
+    <dl class="details">
+      <div>
+        <dt>ID</dt>
+        <dd>{{ student.id }}</dd>
+      </div>
+
+      <div>
+        <dt>Name</dt>
+        <dd>{{ student.name }}</dd>
+      </div>
+
+      <div>
+        <dt>Age</dt>
+        <dd>{{ student.age }}</dd>
+      </div>
+    </dl>
+  } @else {
+    <p class="empty-state">Select a student to see the details.</p>
+  }
+</section>

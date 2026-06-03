@@ -1,0 +1,28 @@
+<form class="student-card" (ngSubmit)="submit()" #studentForm="ngForm">
+  <h2>Add Student</h2>
+
+  <div class="student-fields">
+    <label>
+      ID
+      <input type="number" name="id" min="1" required [(ngModel)]="newStudent.id" />
+    </label>
+
+    <label>
+      Name
+      <input type="text" name="name" required [(ngModel)]="newStudent.name" />
+    </label>
+
+    <label>
+      Age
+      <input
+        type="number"
+        name="age"
+        min="1"
+        required
+        [(ngModel)]="newStudent.age"
+      />
+    </label>
+  </div>
+
+  <button type="submit" [disabled]="studentForm.invalid">Add Student</button>
+</form>

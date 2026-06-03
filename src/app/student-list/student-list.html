@@ -1,0 +1,39 @@
+<section class="student-page">
+  <h1>Student List</h1>
+
+  <app-student-add (addStudent)="addStudent($event)"></app-student-add>
+  <app-student-details [student]="selectedStudent"></app-student-details>
+  <app-student-edit
+    [student]="editingStudent"
+    (save)="saveStudent($event)"
+    (cancel)="cancelEdit()"
+  ></app-student-edit>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (student of students; track student.id) {
+        <tr>
+          <td>{{ student.id }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.age }}</td>
+          <td class="actions">
+            <button type="button" (click)="showDetails(student)">Details</button>
+            <button type="button" (click)="startEdit(student)">Edit</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="4">No students yet.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

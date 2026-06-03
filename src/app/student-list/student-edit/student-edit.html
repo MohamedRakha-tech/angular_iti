@@ -1,0 +1,27 @@
+@if (student) {
+  <form class="student-card" (ngSubmit)="submit()" #editForm="ngForm">
+    <div class="header-row">
+      <h2>Edit Student</h2>
+      <button type="button" class="secondary" (click)="cancel.emit()">Cancel</button>
+    </div>
+
+    <div class="student-fields">
+      <label>
+        ID
+        <input type="number" name="id" min="1" required [(ngModel)]="draft.id" />
+      </label>
+
+      <label>
+        Name
+        <input type="text" name="name" required [(ngModel)]="draft.name" />
+      </label>
+
+      <label>
+        Age
+        <input type="number" name="age" min="1" required [(ngModel)]="draft.age" />
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="editForm.invalid">Save Changes</button>
+  </form>
+}
